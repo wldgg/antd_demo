@@ -2,6 +2,6 @@
 src/main/antd/node_modules
 src/main/antd/.gitignore
 src/main/antd/dist
-src/main/antd/npm-debug.log*
 target
 .idea
+npm-debug.log*

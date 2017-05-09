@@ -10,7 +10,6 @@ const FormItem = Form.Item;
 
 function validateUsername(username) {
   var reg=/^[0-9a-zA-Z_]{6,16}$/;
-  alert(username);
   if(username==undefined||username===''){
     return {
       validateStatus: 'error',
@@ -25,7 +24,28 @@ function validateUsername(username) {
   }
   return {
     validateStatus: 'error',
-    errorMsg: '格式不匹配!',
+    errorMsg: '请输入长度为6-16，由大小写字母，数字，下划线组成的账号!',
+  };
+}
+
+function validatePassword(pwd) {
+  alert("pwd");
+  var reg=/^[0-9a-zA-Z_]{6,16}$/;
+  if(pwd==undefined||pwd===''){
+    return {
+      validateStatus: 'error',
+      errorMsg: 'Please input your password!',
+    };
+  }
+  if (reg.test(pwd)) {
+    return {
+      validateStatus: 'success',
+      errorMsg: null,
+    };
+  }
+  return {
+    validateStatus: 'error',
+    errorMsg: '请包含大小写字母，数字，特殊字符中的至少两种!',
   };
 }
 
@@ -40,11 +60,17 @@ class NormalLoginForm extends React.Component {
   };
   handleSubmit = (e) => {
     var username = this.props.form.getFieldValue('username');
+    var password = this.props.form.getFieldValue('password');
     alert(username);
+    alert(password);
     this.setState({
       username:{
         ...validateUsername(username),
         value:username,
+      },
+      password:{
+        ...validatePassword(password),
+        value:password,
       },
     });
     e.preventDefault();
@@ -54,25 +80,27 @@ class NormalLoginForm extends React.Component {
         alert('login success');
       }
     });
+
   }
   render() {
     const { getFieldDecorator } = this.props.form;
     const name=this.state.username;
+    const pwd=this.state.password;
     return (
       <div>
         <Form onSubmit={this.handleSubmit} className={styles.loginform}>
-          <FormItem help={name.errorMsg} label="用户名" validateStatus={name.validateStatus}>
+          <FormItem label="用户名" help={name.errorMsg} validateStatus={name.validateStatus}>
             {getFieldDecorator('username', {
               rules: [{ required: true}],
             })(
               <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" value={name.value}/>
             )}
           </FormItem>
-          <FormItem label="密码">
+          <FormItem label="密码" help={pwd.errorMsg} validateStatus={pwd.validateStatus}>
             {getFieldDecorator('password', {
               rules: [{ required: true}],
             })(
-              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password"/>
+              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" value={pwd.value}/>
             )}
           </FormItem>
           <FormItem>
