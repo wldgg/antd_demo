@@ -2,8 +2,9 @@
   "private": true,
   "scripts": {
     "start": "roadhog server",
-    "build": "roadhog build",
-    "lint": "eslint --ext .js src test"
+    "build": "roadhog build -o ./../webapp/dist/",
+    "lint": "eslint --ext .js src test",
+    "procommit": "npm run lint"
   },
   "engines": {
     "install-node": "6.9.2"
