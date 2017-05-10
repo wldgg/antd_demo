@@ -80,8 +80,7 @@ class NormalLoginForm extends React.Component {
         alert('login success');
       }
     });
-
-  }
+  };
   render() {
     const { getFieldDecorator } = this.props.form;
     const name=this.state.username;
@@ -119,7 +118,7 @@ class NormalLoginForm extends React.Component {
         </Form>
       </div>
     );
-  }
+  };
 }
 
 const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
