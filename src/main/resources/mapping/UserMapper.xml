@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cam.dao.UserDao">
+
+    <resultMap id="UserBaseMap" type="com.cam.model.User">
+        <id column="userid" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="userpwd" property="userPwd"/>
+        <result column="user_role" property="userRole"/>
+        <result column="user_email" property="userEmail"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="registertime" property="registerTime"/>
+    </resultMap>
+
+    <select id="selectByNamePwd" resultType="java.lang.Integer">
+        SELECT count(1) FROM t_users
+        WHERE username = #{username} and userpwd=#{password}
+    </select>
+
+    <insert id="insertUser">
+        INSERT INTO t_users(username,userpwd,user_email,user_phone,registertime,user_role)
+        VALUES (#{username},#{password},#{useremail},#{userphone},now(),1)
+    </insert>
+
+</mapper>

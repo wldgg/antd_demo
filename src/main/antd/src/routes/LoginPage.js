@@ -5,6 +5,8 @@ import React from 'react';
 import { connect } from 'dva';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import styles from './LoginPage.css';
+import fetch from 'dva/fetch';
+
 
 const FormItem = Form.Item;
 
@@ -29,7 +31,6 @@ function validateUsername(username) {
 }
 
 function validatePassword(pwd) {
-  alert("pwd");
   var reg=/^[0-9a-zA-Z_]{6,16}$/;
   if(pwd==undefined||pwd===''){
     return {
@@ -61,8 +62,6 @@ class NormalLoginForm extends React.Component {
   handleSubmit = (e) => {
     var username = this.props.form.getFieldValue('username');
     var password = this.props.form.getFieldValue('password');
-    alert(username);
-    alert(password);
     this.setState({
       username:{
         ...validateUsername(username),
@@ -74,10 +73,23 @@ class NormalLoginForm extends React.Component {
       },
     });
     e.preventDefault();
+    alert('no1');
     this.props.form.validateFields((err, values) => {
-      if (!err) {
+      if (this.state.username.validateStatus=='success'&&this.state.password.validateStatus=='success') {
         console.log('Received values of form: ', values);
-        alert('login success');
+        let data='username='+this.state.username.value+'&password='+this.state.password.value;
+        var xmlhttp=new XMLHttpRequest();
+        alert('no2');
+
+        xmlhttp.onreadystatechange=function () {
+          if (xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+            alert('login success');
+          }
+        }
+        xmlhttp.open("POST","http://localhost:8080/user/login",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send(data);
       }
     });
   };
