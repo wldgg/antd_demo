@@ -13,6 +13,8 @@
     <!-- 自动扫描  @Controller-->
     <context:component-scan base-package="com.cam.controller"/>
 
+    <mvc:annotation-driven></mvc:annotation-driven>
+
     <!--<mvc:resources mapping="/ui/img/**" location="/ui/img/"/>-->
     
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->

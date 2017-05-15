@@ -1,10 +1,13 @@
 package com.cam.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
 /**
  * Created by Zhangxq on 2016/7/15.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
 
     private Integer userId;
@@ -28,7 +31,7 @@ public class User {
         this.userPhone = userPhone;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 

@@ -1,7 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 src/main/antd/node_modules
-src/main/antd/.gitignore
 src/main/antd/dist
 target
 .idea
 npm-debug.log*
+antd.iml
+.DS_Store

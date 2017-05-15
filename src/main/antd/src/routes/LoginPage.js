@@ -80,16 +80,21 @@ class NormalLoginForm extends React.Component {
         let data='username='+this.state.username.value+'&password='+this.state.password.value;
         var xmlhttp=new XMLHttpRequest();
         alert('no2');
-
-        xmlhttp.onreadystatechange=function () {
-          if (xmlhttp.readyState==4 && xmlhttp.status==200)
-          {
-            alert('login success');
-          }
-        }
         xmlhttp.open("POST","http://localhost:8080/user/login",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xmlhttp.send(data);
+        xmlhttp.onreadystatechange=function () {
+          if (xmlhttp.readyState==XMLHttpRequest.DONE)
+          {
+            alert(xmlhttp.readyState+"   "+xmlhttp.status);
+            if(xmlhttp.status==200||xmlhttp.status==0){
+              let str=JSON.parse(xmlhttp.responseText);
+              alert('ajax success');
+            }
+          }else {
+            alert('ajax fail');
+          }
+        }
       }
     });
   };
