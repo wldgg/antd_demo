@@ -29,7 +29,6 @@ function validateUsername(username) {
 }
 
 function validatePassword(pwd) {
-  alert("pwd");
   var reg=/^[0-9a-zA-Z_]{6,16}$/;
   if(pwd==undefined||pwd===''){
     return {
@@ -59,10 +58,9 @@ class NormalLoginForm extends React.Component {
     },
   };
   handleSubmit = (e) => {
+
     var username = this.props.form.getFieldValue('username');
     var password = this.props.form.getFieldValue('password');
-    alert(username);
-    alert(password);
     this.setState({
       username:{
         ...validateUsername(username),
@@ -74,11 +72,22 @@ class NormalLoginForm extends React.Component {
       },
     });
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-        alert('login success');
-      }
+    if(this.state.username.validateStatus=='success'&&this.state.password.value=='success'){
+      var url='http://www.baidu.com';
+      var promise=fetch(url).then(function (response) {
+        if(response.status===200){
+          return response.json();
+        }else {
+          return {};
+        }
+      });
+    }
+
+    promise = promise.then(function(data){
+      //响应的内容
+      console.log(data);
+    }).catch(function(err){
+      console.log(err);
     });
   };
   render() {
