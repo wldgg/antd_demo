@@ -59,6 +59,9 @@ class NormalLoginForm extends React.Component {
       value:'',
     },
   };
+  handleClick = (e) =>{
+    alert(PUBKEY);
+  };
   handleSubmit = (e) => {
     var username = this.props.form.getFieldValue('username');
     var password = this.props.form.getFieldValue('password');
@@ -126,6 +129,9 @@ class NormalLoginForm extends React.Component {
             <a className={styles.loginformforgot} href="">Forgot password</a>
             <Button type="primary" htmlType="submit" className={styles.loginformbutton}>
               Log in
+            </Button>
+            <Button type="primary" onClick={this.handleClick} className={styles.loginformbutton}>
+              测试我的js
             </Button>
             Or <a href="">register now!</a>
           </FormItem>

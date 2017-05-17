@@ -15,6 +15,14 @@
 
     <mvc:annotation-driven></mvc:annotation-driven>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/index.jsp"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <bean class="com.cam.filter.LoginFilter"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--<mvc:resources mapping="/ui/img/**" location="/ui/img/"/>-->
     
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->

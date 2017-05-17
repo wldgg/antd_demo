@@ -5,9 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dva Demo</title>
   <link rel="stylesheet" href="./dist/index.css" />
+  <script src="https://passport.jd.com/new/js/jsencrypt.min.js"></script>
 </head>
 <body>
-
+<script type="text/javascript">
+    var PUBKEY = doss();
+    function doss() {
+        var publickey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDC7kw8r6tq43pwApYvkJ5laljaN9BZb21TAIfT/vexbobzH7Q8SUdP5uDPXEBKzOjx2L28y7Xs1d9v3tdPfKI2LR7PAzWBmDMn8riHrDDNpUpJnlAGUqJG9ooPn8j7YNpcxCa1iybOlc2kEhmJn5uwoanQq+CA6agNkqly2H4j6wIDAQAB";
+        alert(publickey);
+        var pwd="yc19941231";
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey(publickey);
+        var resultstr=encrypt.encrypt(pwd);
+        alert(resultstr);
+        return resultstr;
+    }
+</script>
 <div id="root"></div>
 
 <script src="./dist/index.js"></script>
